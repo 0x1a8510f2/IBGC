@@ -34,14 +34,7 @@
 		}
 	}
 
-	const enosys = () => {
-		const err = new Error("not implemented");
-		err.code = "ENOSYS";
-		return err;
-	};
-
-	// Added
-	const filesystem = {};
+	filesystem = {};
 
 	let workingDirectory = '/';
 
@@ -60,6 +53,7 @@
 			filesystem[absPath(path)] = content;
 		}
 	};
+
 	global.goStdout = (buf) => {};
 	global.goStderr = (buf) => {};
 
@@ -103,13 +97,16 @@
 		O_EXCL: 1 << 5,
 	};
 
+	const enosys = () => {
+		const err = new Error("not implemented");
+		err.code = "ENOSYS";
+		return err;
+	};
+
 	if (!global.fs) {
-		let outputBuf = "";
 		global.fs = {
-
 			constants,
-
-			writeSync(fd, buf) { console.log("writeSync");
+			writeSync(fd, buf) {
 				if (fd === 1) {
 					global.goStdout(buf);
 				} else if (fd === 2) {
@@ -135,7 +132,7 @@
 					filesystem[file.path] = dest;
 				}
 			},
-			write(fd, buf, offset, length, position, callback) { console.log("write");
+			write(fd, buf, offset, length, position, callback) {
 				if (offset !== 0 || length !== buf.length) {
 					throw new Error('write not fully implemented: ' + offset + ', ' + length + '/' + buf.length);
 				}
@@ -145,8 +142,8 @@
 				this.writeSync(fd, buf);
 				callback(null, length);
 			},
-			chmod(path, mode, callback) { console.log("chmod"); callback(enosys()); },
-			chown(path, uid, gid, callback) { console.log("chown"); callback(enosys()); },
+			chmod(path, mode, callback) { callback(enosys()); },
+			chown(path, uid, gid, callback) { callback(enosys()); },
 			close(fd, callback) {
 				console.log('close(' + fd + ')');
 				openFiles.delete(fd);
@@ -156,7 +153,7 @@
 				console.log('fchmod(' + fd + ', ' + mode + ')');
 				callback(null);
 			},
-			fchown(fd, uid, gid, callback) { console.log("fchown"); callback(enosys()); },
+			fchown(fd, uid, gid, callback) { callback(enosys()); },
 			fstat(fd, callback) {
 				console.log('fstat(' + fd + ')');
 				stat(openFiles[fd].path, callback);
@@ -164,14 +161,14 @@
 			fsync(fd, callback) {
 				callback(null);
 			},
-			ftruncate(fd, length, callback) { console.log("ftruncate"); callback(enosys()); },
-			lchown(path, uid, gid, callback) { console.log("lchown"); callback(enosys()); },
-			link(path, link, callback) { console.log("link"); callback(enosys()); },
+			ftruncate(fd, length, callback) { callback(enosys()); },
+			lchown(path, uid, gid, callback) { callback(enosys()); },
+			link(path, link, callback) { callback(enosys()); },
 			lstat(path, callback) {
 				console.log('lstat(' + path + ')');
 				stat(absPath(path), callback);
 			},
-			mkdir(path, perm, callback) { console.log("mkdir"); callback(null); },
+			mkdir(path, perm, callback) { callback(enosys()); },
 			open(path, flags, mode, callback) {
 				console.log('open(' + path + ', ' + mode + ')');
 				path = absPath(path);
@@ -214,21 +211,21 @@
 				openFiles[fd].offset += n;
 				callback(null, n);
 			},
-			readdir(path, callback) { console.log("readdir"); callback(enosys()); },
-			readlink(path, callback) { console.log("readlink"); callback(enosys()); },
-			rename(from, to, callback) { console.log("rename"); callback(enosys()); },
-			rmdir(path, callback) { cconsole.log("rmdir"); allback(enosys()); },
+			readdir(path, callback) { callback(enosys()); },
+			readlink(path, callback) { callback(enosys()); },
+			rename(from, to, callback) { callback(enosys()); },
+			rmdir(path, callback) { callback(enosys()); },
 			stat(path, callback) {
 				console.log('stat(' + path + ')');
 				stat(absPath(path), callback);
 			},
-			symlink(path, link, callback) { console.log("symlink"); callback(enosys()); },
-			truncate(path, length, callback) { console.log("truncate"); callback(enosys()); },
+			symlink(path, link, callback) { callback(enosys()); },
+			truncate(path, length, callback) { callback(enosys()); },
 			unlink(path, callback) {
 				console.log('unlink(' + path + ')');
 				callback(null);
 			},
-			utimes(path, atime, mtime, callback) { console.log("utimes"); callback(enosys()); },
+			utimes(path, atime, mtime, callback) { callback(enosys()); },
 		};
 	}
 
