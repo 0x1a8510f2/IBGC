@@ -5,13 +5,15 @@
 
         <link rel="stylesheet" href="css/style.css">
 
-		<script src="js/wasm_exec.js"></script>
+		<script src="js/wasm_exec_new.js"></script>
         <script src="js/jquery.min.js"></script>
         <script src="js/lz-string.min.js"></script>
         <script src="js/jquery-linedtextarea.js"></script>
         <script src="js/playground.js"></script>
 
 		<script>
+
+            var target = ""
 
             function download(data){
 
@@ -24,9 +26,11 @@
 
             $(document).ready(function() {
 
+                // Set up code area
                 $('#code').linedtextarea();
                 $('#code').attr('wrap', 'off');
 
+                // Ensure the browser supports webassembly
                 if (!WebAssembly || !WebAssembly.instantiate) {
                     $('#run').val('Unsupported Browser');
                     $('#controls input').attr('disabled', true);
@@ -35,10 +39,12 @@
 
                 let cmds = {};
 
-                const exec = (wasm, args) => new Promise((resolve, reject) => {
+                // Define function to execute Go webassembly in its environment
+                const exec = (wasm, args, env={}) => new Promise((resolve, reject) => {
                     const go = new Go();
                     go.exit = resolve;
                     go.argv = go.argv.concat(args || []);
+                    go.env = env;
                     WebAssembly.instantiate(wasm, go.importObject).then((result) => go.run(result.instance)).catch(reject);
                 });
 
@@ -50,12 +56,12 @@
                         'prebuilt/runtime/internal/atomic.a',
                         'prebuilt/runtime/internal/math.a',
                         'prebuilt/runtime/internal/sys.a',
-                    ].map((path) => fetch(path)
+                    ].map((path) => fetch("compiler/"+path)
                         .then((response) => response.arrayBuffer())
                         .then((buf) => writeToGoFilesystem(path, new Uint8Array(buf)))
                     ).concat(
                         ['compile', 'link', 'gofmt']
-                            .map((cmd) => fetch('cmd/' + cmd + '.wasm')
+                            .map((cmd) => fetch('compiler/cmd/' + cmd + '.wasm')
                                 .then((response) => response.arrayBuffer())
                                 .then((buf) => {
                                     cmds[cmd] = new Uint8Array(buf);
@@ -107,10 +113,10 @@
                                     });
                                 };
 
-                                exec(cmds['compile'], ['-p', 'main', '-complete', '-dwarf=false', '-pack', '-importcfg', 'importcfg', 'main.go'])
-                                    .then((code) => code || exec(cmds['link'], ['-importcfg', 'importcfg.link', '-buildmode=exe', 'main.a']))
+                                exec(cmds['compile'], ['-p', 'main', '-complete', '-dwarf=false', '-pack', '-importcfg', 'importcfg', 'main.go'], {"GOOS": "linux", "GOARCH": "amd64"})
+                                    .then((code) => code || exec(cmds['link'], ['-importcfg', 'importcfg.link', '-buildmode=pie', 'main.a'], {"GOOS": "linux", "GOARCH": "amd64"}))
                                     .then((code) => code || download(readFromGoFilesystem('a.out')))
-                                    .then((code) => code || exec(readFromGoFilesystem('a.out')))
+                                    //.then((code) => code || exec(readFromGoFilesystem('a.out')))
                                     .then((code) => {
                                         output({
                                             Kind: 'end',
