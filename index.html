@@ -114,7 +114,7 @@
                                 };
 
                                 exec(cmds['compile'], ['-v', '-p', 'main', '-complete', '-dwarf=false', '-pack', '-importcfg', 'importcfg', 'main.go'], {"GOOS": "linux", "GOARCH": "amd64"})
-                                    .then((code) => code || exec(cmds['link'], ['-v', '-importcfg', 'importcfg.link', '-buildmode=exe', 'main.a'], {"GOOS": "linux", "GOARCH": "amd64"}))
+                                    .then((code) => code || exec(cmds['link'], ['-v', '-s', '-w', '-importcfg', 'importcfg.link', '-buildmode=exe', 'main.a'], {"GOOS": "linux", "GOARCH": "amd64"}))
                                     .then((code) => code || download(readFromGoFilesystem('a.out')))
                                     //.then((code) => code || exec(readFromGoFilesystem('a.out')))
                                     .then((code) => {
