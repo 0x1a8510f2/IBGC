@@ -42,15 +42,16 @@
 
     // Added
     const filesystem = {};
+
     let workingDirectory = '/';
+
     let absPath = (path) => {
         if (path[0] == '/') {
             return path;
         }
         return workingDirectory + path.replace(/^\.\/?/, '');
     };
-    const openFiles = new Map();
-    let nextFd = 1000;
+
     global.readFromGoFilesystem = (path) => filesystem[absPath(path)];
     global.writeToGoFilesystem = (path, content) => {
         if (typeof content === 'string') {
@@ -59,12 +60,54 @@
             filesystem[absPath(path)] = content;
         }
     };
+    global.goStdout = (buf) => {};
+    global.goStderr = (buf) => {};
+
+    const openFiles = new Map();
+    let nextFd = 1000;
+
+    let stat = (path, callback) => {
+        let mode = 0;
+        if (path === '/') {
+            mode |= 0x80000000;
+        } else if (filesystem[path] === undefined) {
+            const err = new Error('no such file');
+            err.code = 'ENOENT';
+            callback(err);
+            return;
+        }
+        callback(null, {
+            mode,
+            dev: 0,
+            ino: 0,
+            nlink: 0,
+            uid: 0,
+            gid: 0,
+            rdev: 0,
+            size: 0,
+            blksize: 0,
+            blocks: 0,
+            atimeMs: 0,
+            mtimeMs: 0,
+            ctimeMs: 0,
+            isDirectory: () => !!(mode & 0x80000000),
+        });
+    };
+
+    const constants = {
+        O_WRONLY: 1 << 0,
+        O_RDWR: 1 << 1,
+        O_CREAT: 1 << 2,
+        O_TRUNC: 1 << 3,
+        O_APPEND: 1 << 4,
+        O_EXCL: 1 << 5,
+    };
 
 	if (!global.fs) {
         let outputBuf = "";
 		global.fs = {
 
-            constants: { O_WRONLY: -1, O_RDWR: -1, O_CREAT: -1, O_TRUNC: -1, O_APPEND: -1, O_EXCL: -1 }, // unused
+            constants,
 
 			writeSync(fd, buf) { console.log("writeSync");
                 if (fd === 1) {
@@ -128,7 +171,7 @@
                 console.log('lstat(' + path + ')');
                 stat(absPath(path), callback);
             },
-			mkdir(path, perm, callback) { console.log("mkdir"); callback(enosys()); },
+			mkdir(path, perm, callback) { console.log("mkdir"); callback(null); },
             open(path, flags, mode, callback) {
                 console.log('open(' + path + ', ' + mode + ')');
                 path = absPath(path);
