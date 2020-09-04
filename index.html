@@ -1,17 +1,17 @@
 <html>
-	<head>
-		<meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
         <title>The WebAssembly Go Playground</title>
 
         <link rel="stylesheet" href="css/style.css">
 
-		<script src="js/wasm_exec.js"></script>
+        <script src="js/wasm_exec.js"></script>
         <script src="js/jquery.min.js"></script>
         <script src="js/lz-string.min.js"></script>
         <script src="js/jquery-linedtextarea.js"></script>
         <script src="js/playground.js"></script>
 
-		<script>
+        <script>
 
             var target = ""
 
@@ -161,25 +161,25 @@
                     $('#controls input').attr('disabled', false);
                 });
             });
-		</script>
-	</head>
-	<body itemscope itemtype="http://schema.org/CreativeWork">
-		<div id="banner">
-			<div id="head" itemprop="name">The WebAssembly Go Playground</div>
-			<div id="controls">
-				<input type="button" value="Loading..." id="run" disabled />
+        </script>
+    </head>
+    <body itemscope itemtype="http://schema.org/CreativeWork">
+        <div id="banner">
+            <div id="head" itemprop="name">The WebAssembly Go Playground</div>
+            <div id="controls">
+                <input type="button" value="Loading..." id="run" disabled />
                 <input type="button" value="Format" id="fmt" style="display:none;" disabled>
-			</div>
+            </div>
             <a style="float:right;padding:15px;font-family:sans-serif;" href="https://github.com/ccbrown/wasm-go-playground" target="_blank">github.com/ccbrown/wasm-go-playground</a>
-		</div>
-		<div id="wrap">
-			<textarea itemprop="description" id="code" name="code" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">package main
+        </div>
+        <div id="wrap">
+            <textarea itemprop="description" id="code" name="code" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">package main
 
 func main() {
-	println(&#34;Hello, WebAssembly playground!&#34;)
+    println(&#34;Hello, WebAssembly playground!&#34;)
 }
 </textarea>
-		</div>
-		<div id="output"></div>
-	</body>
+        </div>
+        <div id="output"></div>
+    </body>
 </html>
