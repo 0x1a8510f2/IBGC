@@ -13,14 +13,37 @@
 
         <script>
 
+            // For future when multiple OSs and Architectures are supported
             var target = ""
 
-            function download(data){
+            // Generates a random name for a file if none is specified
+            function makeFileID(length) {
+                var result           = '';
+                var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                var charactersLength = characters.length;
+                for ( var i = 0; i < length; i++ ) {
+                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                }
+                return result;
+            }
 
-                // Download binary file from Uint8Array
+            function download(data, filename=makeFileID(10)){
+
+                // Create an element to contain the binary as a data URI
+                var downloadLink = document.createElement('a');
+                // Generate a URI from the file
                 var blob = new Blob([data], {type: "application/octet-stream"});
-                var objectUrl = URL.createObjectURL(blob);
-                window.open(objectUrl);
+                // Set it's href to the binary URI
+                downloadLink.href = URL.createObjectURL(blob);
+                // Set the download filename
+                downloadLink.download = filename;
+                // Firefox requires the link to be in the body so make it invisible and add it
+                downloadLink.style.visibility = "hidden";
+                document.body.appendChild(downloadLink);
+                // Simulate click on the link (trigger download)
+                downloadLink.click();
+                // Remove the link when done
+                document.body.removeChild(downloadLink);
 
             }
 
