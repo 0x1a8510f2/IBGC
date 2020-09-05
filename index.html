@@ -139,7 +139,7 @@
                         },
                     });
 
-                    $('#run').val('Run');
+                    $('#run').val('Compile');
 
                     $('#fmt').show();
                     $('#fmt').click(() => {
@@ -165,18 +165,18 @@
     </head>
     <body itemscope itemtype="http://schema.org/CreativeWork">
         <div id="banner">
-            <div id="head" itemprop="name">The WebAssembly Go Playground</div>
+            <div id="head" itemprop="name">The WebAssembly Go Compiler</div>
             <div id="controls">
                 <input type="button" value="Loading..." id="run" disabled />
                 <input type="button" value="Format" id="fmt" style="display:none;" disabled>
             </div>
-            <a style="float:right;padding:15px;font-family:sans-serif;" href="https://github.com/ccbrown/wasm-go-playground" target="_blank">github.com/ccbrown/wasm-go-playground</a>
+            <a style="float:right;padding:15px;font-family:sans-serif;" href="https://github.com/TR-SLimey/IBGC" target="_blank">github.com/TR-SLimey/IBGC</a>
         </div>
         <div id="wrap">
             <textarea itemprop="description" id="code" name="code" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">package main
 
 func main() {
-    println(&#34;Hello, WebAssembly playground!&#34;)
+    println(&#34;Hello from WebAssembly Go Compiler!&#34;)
 }
 </textarea>
         </div>
