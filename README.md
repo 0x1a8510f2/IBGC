@@ -1,5 +1,17 @@
-## WARNING - Work In Progress!
-As of commit [15961045bd6da95e283d8d7298e110440bc1d97d](https://github.com/TR-SLimey/IBGC/commit/15961045bd6da95e283d8d7298e110440bc1d97d) the compiler is now able to compile for linux/amd64 exclusively with no standard library except for "runtime". No other features work so far.
+# In-Browser Go Compiler
 
-# IBGC
-In-Browser Go(lang) Compiler originally made for [Wraith](https://github.com/TR-SLimey/wraith) from the code at [ccbrown/wasm-go-playground](https://github.com/ccbrown/wasm-go-playground)
+This project is based on [ccbrown/wasm-go-playground](https://github.com/ccbrown/wasm-go-playground)
+
+This is the Go compiler ("gc") compiled for WASM, running in your browser! It can be used to compile Go programs without the need to install anything on your computer.
+
+You can try it out here: https://tr-slimey.github.io/IBGC/
+
+#### ⚠️ Warning ⚠️
+
+* According to the original project, Safari works, but is unbearably slow. **Chrome or Firefox for desktop is highly recommended**.
+* Imports other than "runtime" are currently not supported, but will be added over time.
+* Targets other than Linux/amd64 are currently not supported but will also be added over time.
+
+## Explanation
+
+For information about the files in this project, please see the original project linked above. The directory structure changes should be self-explanatory.
