@@ -166,6 +166,11 @@
 
                     $('#loading').hide();
 
+                    $('#filename').val("IBGC-"+Math.floor(Date.now() / 1000)+"-"+makeFileID(5));
+                    $('#filename').show();
+
+                    $('#target').show();
+
                     $('#run').show();
 
                     $('#fmt').show();
@@ -185,11 +190,6 @@
                         ;
                     });
 
-                    $('#filename').val("IBGC-"+Math.floor(Date.now() / 1000)+"-"+makeFileID(5));
-                    $('#filename').show();
-
-                    $('#target').show();
-
                     $('#controls input').attr('disabled', false);
                 });
             });
@@ -200,14 +200,14 @@
             <div id="head" itemprop="name">The WebAssembly Go Compiler</div>
             <p id="loading" style="float:left;padding:0px;font-family:sans-serif;font-style:italic;">Loading compiler components. This may take a while...</p>
             <div id="controls">
-                <input type="button" value="Compile" id="run" style="display:none;" disabled />
-                <input type="button" value="Format" id="fmt" style="display:none;" disabled />
                 <input type="text" placeholder="File Name" id="filename" style="display:none;" />
                 <select id="target" style="display:none;">
                     <optgroup label="Linux">
                         <option value="linux/amd64">Linux/AMD64</option>
                     </optgroup>
                 </select>
+                <input type="button" value="Compile" id="run" style="display:none;" disabled />
+                <input type="button" value="Format" id="fmt" style="display:none;" disabled />
             </div>
             <a style="float:right;padding:15px;font-family:sans-serif;" href="https://github.com/TR-SLimey/IBGC" target="_blank">github.com/TR-SLimey/IBGC</a>
         </div>
