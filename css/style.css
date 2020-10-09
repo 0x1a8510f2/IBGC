@@ -58,7 +58,6 @@ a {
 	border: none;
 	outline: none;
 	resize: none;
-	wrap: off;
 	float: right;
 }
 #output {
