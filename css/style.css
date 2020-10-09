@@ -126,13 +126,27 @@ input:disabled {
 	height: 10px;
 	width: 10px;
 }
-#shareURL {
-	width: 280px;
+select,
+#importsBox {
+	height: 30px;
+	border: 1px solid #375EAB;
 	font-size: 16px;
-	border: 1px solid #ccc;
-	background: #eee;
-	color: black;
-	height: 23px;
+	font-family: sans-serif;
+	background: #375EAB;
+	color: white;
+	position: static;
+	top: 1px;
+	border-radius: 5px;
+}
+select:disabled {
+	background: #C0C0C0;
+}
+#importsBox select {
+	position: relative;
+	top: -2px;
+	left: 1px;
+	height: 10px;
+	width: 10px;
 }
 #embedLabel {
 	font-family: sans-serif;
