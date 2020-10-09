@@ -247,7 +247,7 @@ function PlaygroundOutput(el) {
     function loading() {
       lineClear();
       if (running) running.Kill();
-      output.removeClass("error").text('Waiting for remote server...');
+      output.removeClass("error").text('Waiting for compilation to complete...');
     }
     function run() {
       loading();
