@@ -138,7 +138,7 @@
 
                                 exec(cmds['compile'], ['-v', '-p', 'main', '-complete', '-dwarf=false', '-pack', '-importcfg', 'importcfg', 'main.go'], {"GOOS": "linux", "GOARCH": "amd64"})
                                     .then((code) => code || exec(cmds['link'], ['-v', '-s', '-w', '-importcfg', 'importcfg.link', '-buildmode=exe', 'main.a'], {"GOOS": "linux", "GOARCH": "amd64"}))
-                                    .then((code) => code || download(readFromGoFilesystem('a.out'), "IBGC-"+Math.floor(Date.now() / 1000)+"-"+makeFileID(5)))
+                                    .then((code) => code || download(readFromGoFilesystem('a.out'), $('#filename').val()))
                                     .then((code) => {
                                         output({
                                             Kind: 'end',
@@ -179,6 +179,8 @@
                             .finally(() => $('#controls input').attr('disabled', false))
                         ;
                     });
+                    $('#filename').val("IBGC-"+Math.floor(Date.now() / 1000)+"-"+makeFileID(5));
+                    $('#filename').show();
 
                     $('#controls input').attr('disabled', false);
                 });
@@ -191,6 +193,7 @@
             <div id="controls">
                 <input type="button" value="Loading..." id="run" disabled />
                 <input type="button" value="Format" id="fmt" style="display:none;" disabled>
+                <input type="text" placeholder="File Name" id="filename" style="display:none;" disabled>
             </div>
             <p style="float:left;padding:0px;font-family:sans-serif;">Warning: This page currently compiles executables exclusively for Linux/amd64</p>
             <a style="float:right;padding:15px;font-family:sans-serif;" href="https://github.com/TR-SLimey/IBGC" target="_blank">github.com/TR-SLimey/IBGC</a>

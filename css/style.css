@@ -105,7 +105,7 @@ a {
 	float: right;
 	padding: 10px 15px;
 }
-input[type=button],
+input,
 #importsBox {
 	height: 30px;
 	border: 1px solid #375EAB;
@@ -117,7 +117,7 @@ input[type=button],
 	top: 1px;
 	border-radius: 5px;
 }
-input[type=button]:disabled {
+input:disabled {
 	background: #C0C0C0;
 }
 #importsBox input {
