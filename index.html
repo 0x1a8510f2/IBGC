@@ -161,7 +161,9 @@
                         },
                     });
 
-                    $('#run').val('Compile');
+                    $('#loading').hide();
+
+                    $('#run').show();
 
                     $('#fmt').show();
                     $('#fmt').click(() => {
@@ -190,8 +192,9 @@
     <body itemscope itemtype="http://schema.org/CreativeWork">
         <div id="banner">
             <div id="head" itemprop="name">The WebAssembly Go Compiler</div>
+            <p id="loading" style="float:left;padding:0px;font-family:sans-serif;font-style:italic;">Loading compiler components. This may take a while...</p>
             <div id="controls">
-                <input type="button" value="Loading..." id="run" disabled />
+                <input type="button" value="Compile" id="run" style="display:none;" disabled />
                 <input type="button" value="Format" id="fmt" style="display:none;" disabled>
                 <input type="text" placeholder="File Name" id="filename" style="display:none;" disabled>
             </div>
