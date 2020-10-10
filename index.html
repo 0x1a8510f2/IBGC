@@ -162,7 +162,7 @@
                                 var compileArgs = ['-v', '-p', 'main', '-complete', '-goversion', 'go1.15.1', '-dwarf=false', '-pack', '-importcfg', 'importcfg', 'main.go'];
 
                                 // Arguments to pass to the linker
-                                var linkArgs = ['-v', '-s', '-w', '-importcfg', 'importcfg.link', '-buildmode=exe', '-o', 'a.out', 'main.a'];
+                                var linkArgs = ['-v', '-s', '-w', '-importcfg', 'importcfg.link', '-buildmode=pie', '-o', 'a.out', 'main.a'];
 
                                 exec(cmds['compile'], compileArgs, {"GOOS": target[0], "GOARCH": target[1]})
                                     .then((code) => code || exec(cmds['link'], linkArgs, {"GOOS": target[0], "GOARCH": target[1]}))
