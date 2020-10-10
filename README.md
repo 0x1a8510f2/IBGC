@@ -8,9 +8,10 @@ You can try it out here: https://tr-slimey.github.io/IBGC/
 
 #### ⚠️ Warning ⚠️
 
-* According to the original project, Safari works, but is unbearably slow. **Chrome or Firefox for desktop is highly recommended**.
-* Imports other than "runtime" are currently not supported, but will be added over time.
-* Targets other than Linux/amd64 are currently not supported but will also be added over time. Windows/amd64 is currently being added.
+- According to the original project, Safari works, but is unbearably slow. **Chrome or Firefox for desktop is highly recommended**.
+- Imports other than "runtime" are currently not supported, but will be added over time.
+- Targets other than Linux/amd64 and Windows/amd64 are currently not supported but will also be added over time.
+- **You should never trust unofficial compilers to compile your executables! See [TheKenThompsonHack](https://wiki.c2.com/?TheKenThompsonHack) for more information. You are encouraged to replace the binary compiler in this repository with one compiled from source by yourself!**
 
 ## Explanation
 
