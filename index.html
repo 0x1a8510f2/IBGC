@@ -97,6 +97,10 @@
                         .then((response) => response.arrayBuffer())
                         .then((buf) => {
                             cmds[cmd] = new Uint8Array(buf);
+                        }).then(() => {
+                            // Hide loading and show the controls
+                            $('#loading').hide();
+                            $('#controls').show();
                         })
                     )
 
@@ -252,10 +256,6 @@
                         .finally(() => $('#controls input select').attr('disabled', false))
                     ;
                 });
-
-                // Hide loading and show the controls
-                $('#loading').hide();
-                $('#controls').show();
 
             });
         </script>
