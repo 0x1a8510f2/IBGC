@@ -151,8 +151,11 @@
                                     Body: 'Starting compilation...\n',
                                 });
 
-                                exec(cmds['compile'], ['-v', '-p', 'main', '-complete', '-dwarf=false', '-pack', '-importcfg', 'importcfg', 'main.go'], {"GOOS": "linux", "GOARCH": "amd64"})
-                                    .then((code) => code || exec(cmds['link'], ['-v', '-s', '-w', '-importcfg', 'importcfg.link', '-buildmode=exe', 'main.a'], {"GOOS": "linux", "GOARCH": "amd64"}))
+                                // Get the target OS and arch to compile for. These will be placed in environment variables for the compiler
+                                const target = currentTargetComponents.split("/")
+
+                                exec(cmds['compile'], ['-v', '-p', 'main', '-complete', '-dwarf=false', '-pack', '-importcfg', 'importcfg', 'main.go'], {"GOOS": target[0], "GOARCH": target[1]})
+                                    .then((code) => code || exec(cmds['link'], ['-v', '-s', '-w', '-importcfg', 'importcfg.link', '-buildmode=exe', 'main.a'], {"GOOS": target[0], "GOARCH": target[1]}))
                                     .then((code) => code || download(readFromGoFilesystem('a.out'), $('#filename').val()))
                                     .then((code) => {
                                         output({
@@ -267,6 +270,9 @@
                     <option value="null" selected="selected">(Please Select)</option>
                     <optgroup label="Linux">
                         <option value="linux/amd64">Linux/AMD64</option>
+                    </optgroup>
+                    <optgroup label="Windows">
+                        <option value="windows/amd64">Windows/AMD64</option>
                     </optgroup>
                 </select>
                 <input type="button" value="Compile" id="run" />
