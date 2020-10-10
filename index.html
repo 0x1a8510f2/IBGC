@@ -145,6 +145,12 @@
                                     });
                                 };
 
+                                // Let the user know that the compiler is starting as sometimes it takes a while
+                                output({
+                                    Kind: 'stdout',
+                                    Body: 'Starting compilation...\n',
+                                });
+
                                 exec(cmds['compile'], ['-v', '-p', 'main', '-complete', '-dwarf=false', '-pack', '-importcfg', 'importcfg', 'main.go'], {"GOOS": "linux", "GOARCH": "amd64"})
                                     .then((code) => code || exec(cmds['link'], ['-v', '-s', '-w', '-importcfg', 'importcfg.link', '-buildmode=exe', 'main.a'], {"GOOS": "linux", "GOARCH": "amd64"}))
                                     .then((code) => code || download(readFromGoFilesystem('a.out'), $('#filename').val()))
