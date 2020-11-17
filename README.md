@@ -63,3 +63,7 @@ as follows (Linux with Go 1.15.1):
 
     // In my case, this means that I should copy runtime/internal/sys over like so:
     cp /home/username/.cache/go-build/e2/e25312a0861f088752b700b121822e28786e686a0698b0dd145b013f4c83aed2-d ~/Projects/IBGC/compiler/prebuilt/windows/amd64/runtime/internal/sys.a
+
+## Related Projects
+- [ccbrown/wasm-go-playground](https://github.com/ccbrown/wasm-go-playground) - The project IBGC is based on
+- [JohnStarich/go-wasm](https://github.com/JohnStarich/go-wasm) - In-browser Go IDE
