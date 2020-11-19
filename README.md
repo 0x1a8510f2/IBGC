@@ -1,3 +1,6 @@
+## Unmaintained
+More projects like this one seem to be popping up, and my primary usecase for this project no longer exists, so I won't be investing more time into it. If you are looking for maintained projects like this one, please check the Related Projects section at the bottom of this file. If you would like to contribute to/maintain the project, please open a pull request with your initial changes stating that you want to contribute and I might add you to the repository as a contributor.
+
 # In-Browser Go Compiler
 
 This project is based on [ccbrown/wasm-go-playground](https://github.com/ccbrown/wasm-go-playground)
@@ -11,7 +14,7 @@ You can try it out here: https://tr-slimey.github.io/IBGC/
 - **You should never trust unofficial compilers to compile your executables! See [TheKenThompsonHack](https://wiki.c2.com/?TheKenThompsonHack) for more information. You are encouraged to replace the binary files in this repository with those compiled from source by yourself!**
 - According to the original project, Safari works, but is unbearably slow. **Chrome or Firefox for desktop is highly recommended**.
 - Imports other than "runtime" are currently not supported, but will be added over time.
-- Targets other than Linux/amd64 and Windows/amd64 are currently not supported but will also be added over time.
+- Targets other than Linux/amd64 and Windows/amd64 are currently not supported but might be added over time.
 
 ## Explanation
 
