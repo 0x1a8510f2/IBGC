@@ -1,5 +1,5 @@
 ## Unmaintained
-More projects like this one seem to be popping up, and my primary usecase for this project no longer exists, so I won't be investing more time into it. If you are looking for maintained projects like this one, please check the [Related Projects](#related-projects) section at the bottom of this file. If you would like to contribute to/maintain the project, please open a pull request with your initial changes stating that you want to contribute and I might add you to the repository as a contributor.
+More projects like this one seem to be popping up, and my primary usecase for this project no longer exists, so I won't be investing more time into it. If you are looking for maintained projects like this one, please check the [Related Projects](#related-projects) section at the bottom of this file. If you would like to contribute to/maintain the project, please open a pull request with your initial changes stating that you want to contribute.
 
 # In-Browser Go Compiler
 
